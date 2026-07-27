@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIKU FIT｜作る前に 目的を整える。</title>
+  <meta name="description" content="KIKU FITは、目的や課題を整理し、その会社に合った方法を考えるスリーイーデザインの相談サービスです。">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root{
+      --black:#111318;
+      --white:#ffffff;
+      --lime:#dfff3f;
+      --paper:#f4f4ef;
+      --gray:#646872;
+      --line:#d8dbe1;
+      --dark-line:#3b3f47;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--black);
+      background:var(--white);
+      font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+      line-height:1.8;
+      letter-spacing:.02em;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(var(--max),calc(100% - 56px));margin:auto}
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      color:#fff;
+      background:rgba(17,19,24,.96);
+      border-bottom:1px solid var(--dark-line);
+      backdrop-filter:blur(12px);
+    }
+    .header-inner{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+    .logo{
+      display:flex;
+      align-items:baseline;
+      gap:12px;
+      font-size:24px;
+      font-weight:800;
+      letter-spacing:-.04em;
+    }
+    .logo small{
+      color:#bcc0c8;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.09em;
+    }
+    nav{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:800}
+    .nav-cta{padding:10px 17px;border:1px solid var(--lime);color:var(--lime)}
+
+    .hero{
+      min-height:calc(100vh - 72px);
+      display:grid;
+      align-items:center;
+      padding:90px 0 84px;
+      color:#fff;
+      background:var(--black);
+      border-bottom:1px solid var(--dark-line);
+    }
+    .hero-topline{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:34px;
+      color:var(--lime);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .hero-topline::before{content:"";width:62px;height:2px;background:var(--lime)}
+    h1{
+      margin:0;
+      font-size:clamp(48px,6vw,84px);
+      line-height:1.08;
+      letter-spacing:-.04em;
+      font-weight:800;
+    }
+    h1 span{display:block;white-space:nowrap}
+    .hero-bottom{
+      display:grid;
+      grid-template-columns:1.12fr .88fr;
+      gap:74px;
+      align-items:end;
+      margin-top:58px;
+    }
+    .hero-lead{
+      margin:0;
+      max-width:670px;
+      font-size:clamp(19px,2vw,28px);
+      line-height:1.7;
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+    .hero-lead span{display:block}
+    .hero-side{padding-left:30px;border-left:1px solid #474b53}
+    .name-origin{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:14px;font-weight:900}
+    .name-origin span:nth-child(2){color:var(--lime)}
+    .hero-side p{margin:0;color:#bcc0c8;font-size:15px;line-height:1.9}
+
+    section{padding:116px 0;border-bottom:1px solid var(--line)}
+    .paper{background:var(--paper)}
+    .section-head{
+      display:grid;
+      grid-template-columns:190px 1fr;
+      gap:38px;
+      align-items:start;
+      margin-bottom:68px;
+    }
+    .section-kicker{
+      padding-top:10px;
+      color:var(--black);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    h2{
+      margin:0;
+      max-width:930px;
+      font-size:clamp(34px,4vw,54px);
+      line-height:1.28;
+      letter-spacing:-.035em;
+      font-weight:800;
+    }
+    .section-title-lines span{display:block}
+    .section-title-lines{font-size:clamp(31px,3.45vw,47px);line-height:1.35;text-wrap:balance}
+
+    .cases{border-top:3px solid var(--black)}
+    .case{
+      display:grid;
+      grid-template-columns:138px minmax(300px,.92fr) minmax(360px,1.08fr);
+      gap:38px;
+      padding:46px 0;
+      border-bottom:1px solid var(--line);
+    }
+    .case-no{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:96px;
+      height:32px;
+      border:1px solid var(--black);
+      color:var(--black);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.06em;
+    }
+    .case-title{
+      font-size:clamp(23px,2.25vw,30px);
+      line-height:1.5;
+      font-weight:800;
+      letter-spacing:-.025em;
+    }
+    .case-body{color:var(--gray);font-size:16px;line-height:1.9}
+    .case-body strong{display:block;margin-bottom:10px;color:var(--black);font-size:19px;line-height:1.55}
+    .case-body p{margin:0 0 16px}
+    .case-body p:last-child{margin-bottom:0}
+
+    .dark{color:#fff;background:var(--black);border-bottom:1px solid var(--dark-line)}
+    .dark .section-kicker{color:var(--lime)}
+    .process{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--dark-line)}
+    .process-item{min-height:310px;padding:30px 28px;border-right:1px solid var(--dark-line)}
+    .process-item:last-child{border-right:0}
+    .process-num{display:inline-flex;align-items:center;justify-content:center;width:42px;height:26px;border:1px solid var(--lime);color:var(--lime);font-size:12px;font-weight:900;letter-spacing:.06em}
+    .process-item h3{margin:76px 0 18px;font-size:31px;letter-spacing:-.04em}
+    .process-item p{margin:0;color:#bcc0c8;font-size:15px;line-height:1.9}
+
+    .point-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+    .point{min-height:330px;padding:42px 38px;background:#fff;display:flex;flex-direction:column}
+    .point span{display:inline-flex;align-items:center;justify-content:center;width:38px;height:24px;color:#fff;background:var(--black);font-size:11px;font-weight:900}
+    .point h3{margin:42px 0 18px;font-size:clamp(21px,1.7vw,25px);line-height:1.5;letter-spacing:-.035em;text-wrap:balance}
+    .point p{margin:0;color:var(--gray);font-size:15px;line-height:1.9;text-wrap:pretty}
+
+    .statement{padding:124px 0;color:#fff;background:var(--black);border-bottom:1px solid var(--dark-line)}
+    .statement p{margin:0;max-width:1080px;font-size:clamp(36px,5vw,68px);line-height:1.24;letter-spacing:-.04em;font-weight:800}
+    .statement small{display:block;margin-top:38px;color:var(--lime);font-size:14px;font-weight:800;letter-spacing:.05em}
+    .statement p.statement-sub{margin:32px 0 0;max-width:620px;color:#9a9fa8;font-size:19px;line-height:1.9;font-weight:600;letter-spacing:0}
+
+    .contact{padding:116px 0 78px;color:var(--black);background:var(--paper);border-bottom:0}
+    .contact-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:76px;align-items:end}
+    .contact h2{font-size:clamp(40px,5.4vw,72px)}
+    .contact-text{color:var(--gray);font-size:17px;line-height:1.9}
+    .contact-link{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-top:32px;
+      padding:22px 28px;
+      color:var(--lime);
+      background:var(--black);
+      font-size:19px;
+      font-weight:900;
+    }
+    .contact-link span:last-child{font-size:28px}
+
+    footer{padding:28px 0;color:#fff;background:var(--black);font-size:12px}
+    .footer-inner{display:flex;justify-content:space-between;gap:24px}
+
+    @media(max-width:980px){
+      .case{grid-template-columns:110px 1fr}
+      .case-body{grid-column:2}
+      .hero-bottom,.section-head,.contact-grid{grid-template-columns:1fr;gap:32px}
+      .hero-side{padding-left:0;padding-top:24px;border-left:0;border-top:1px solid var(--dark-line)}
+    }
+    @media(max-width:720px){
+      .wrap{width:min(var(--max),calc(100% - 28px))}
+      nav a:not(.nav-cta){display:none}
+      .logo small{display:none}
+      .hero{min-height:auto;padding:64px 0 60px}
+      h1{font-size:clamp(44px,13vw,68px)}
+      h1 span{white-space:normal}
+      .hero-bottom{margin-top:42px}
+      section{padding:82px 0}
+      .section-head{margin-bottom:44px}
+      .case{grid-template-columns:1fr;gap:14px;padding:34px 0}
+      .case-body{grid-column:auto}
+      .process,.point-grid{grid-template-columns:1fr}
+      .process-item{min-height:auto;border-right:0;border-bottom:1px solid var(--dark-line)}
+      .process-item:last-child{border-bottom:0}
+      .process-item h3{margin:42px 0 14px}
+      .point{min-height:auto;padding:34px}
+      .point h3{margin-top:34px}
+      .statement{padding:84px 0}
+      .footer-inner{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap header-inner">
+    <a class="logo" href="#top">KIKU FIT</a>
+    <nav>
+      <a href="#about">KIKU FITとは</a>
+      <a href="#service">サービス内容</a>
+      <a class="nav-cta" href="#contact">相談する</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-topline">KIKU + FIT</div>
+      <h1><span>作る前に</span><span>目的を整える。</span></h1>
+      <div class="hero-bottom">
+        <p class="hero-lead">
+          <span>ホームページもSNSも</span>
+          <span>作ることが目的ではありません。</span>
+          <br>
+          <span>まず、あなたが何をしたいかを聞く。</span>
+          <span>そこから始める相談サービスです。</span>
+        </p>
+        <div class="hero-side">
+          <div class="name-origin"><span>KIKU</span><span>+</span><span>FIT</span></div>
+          <p>目的や課題を整理し<br>その会社に合う方法へ整える。<br><br>KIKU FITは<br>スリーイーデザインが提供するサービスです。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-kicker">WHY KIKU FIT</div>
+        <h2 class="section-title-lines"><span>言葉だけでなく</span><span>仕組みまで分かるようにします。</span></h2>
+      </div>
+
+      <div class="cases">
+        <article class="case">
+          <div class="case-no">01 / WEB</div>
+          <div class="case-title">分からない言葉を<br>聞いて整理します</div>
+          <div class="case-body">
+            <strong>家に例えると、分かりやすくなります。</strong>
+            <p>サーバーは土地、ドメインは住所、ホームページは建物です。</p>
+            <p>保守は、マンションでいう管理人のようなもの。何をどこまで管理しているのかを、一緒に確認します。</p>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-no">02 / DESIGN</div>
+          <div class="case-title">見た目より先に<br>伝えたいことを聞きます</div>
+          <div class="case-body">
+            <strong>誰に、何を、どう伝えるのか。</strong>
+            <p>目的が曖昧なままでは、きれいに作っても機能しません。</p>
+            <p>話を聞いて整理した内容を、制作会社に伝える。そこから、伝わるデザインが生まれます。</p>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-no">03 / SNS</div>
+          <div class="case-title">始める前に<br>目的を聞きます</div>
+          <div class="case-body">
+            <strong>集客なのか、採用なのか、認知を広げたいのか。</strong>
+            <p>目的によって発信する内容も、使う媒体も、続け方も変わります。</p>
+            <p>方法を決める前に、まず目的を聞きます。</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark" id="service">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-kicker">HOW IT WORKS</div>
+        <h2>最初にするのは<br>提案ではなくヒアリングです。</h2>
+      </div>
+      <div class="process">
+        <article class="process-item">
+          <div class="process-num">01</div>
+          <h3>事前相談</h3>
+          <p>見積もりや提案書が届いた。内容を一緒に見て、分かる言葉に整理します。</p>
+        </article>
+        <article class="process-item">
+          <div class="process-num">02</div>
+          <h3>打ち合わせ支援</h3>
+          <p>打ち合わせで聞いておきたいことを整理し、終わったあとに内容を確認します。</p>
+        </article>
+        <article class="process-item">
+          <div class="process-num">03</div>
+          <h3>返信のアドバイス</h3>
+          <p>伝えたいことを整理して、返信文を一緒に考えます。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-kicker">CONSULTATION</div>
+        <h2>答えが決まっていなくても<br>相談できます。</h2>
+      </div>
+      <div class="point-grid">
+        <article class="point">
+          <span>01</span>
+          <h3>見積もりの内容が<br>分からない</h3>
+          <p>サーバー、ドメイン、保守、制作費。何にいくらかかっているのか、一緒に整理します。保守は、マンションの管理人のようなもの。契約はあっても、機能していないこともあります。</p>
+        </article>
+        <article class="point">
+          <span>02</span>
+          <h3>説明を聞いても<br>よく分からない</h3>
+          <p>インターネット上にホームページを作ります。これでは、道に家を建てますと言っているのと同じです。サーバーは土地、ドメインは住所。役割まで分かる言葉で説明します。</p>
+        </article>
+        <article class="point">
+          <span>03</span>
+          <h3>何をすればいいか<br>分からない</h3>
+          <p>ホームページやSNSありきでは考えません。まず何をやりたいのかを聞き、今の状況と目的に合った方法を一緒に考えます。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="statement">
+    <div class="wrap">
+      <p>何を作りますかより先に<br>何をしたいですかを聞く。</p>
+      <p class="statement-sub">ホームページも、デザインも、SNSも。<br>伝わらない言葉を、伝わる言葉に。<br>発注する側と制作会社の間に立って、内容を整理します。</p>
+      <small>KIKU FIT — KIKU + FIT</small>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="section-kicker">CONTACT</div>
+        <h2>まずは<br>今の状況をお聞かせください。</h2>
+      </div>
+      <div class="contact-text">
+        <p>何を作ればいいか分からない。<br>説明や見積もりの内容が分からない。<br><br>分からないからこそ、相談する意味があります。<br><br>初回のご相談は無料です。<br>今の状況を聞いた上で、必要なご案内をします。</p>
+        <a class="contact-link" href="mailto:3edesign.info@gmail.com"><span>メールで相談する</span><span>→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner"><div>KIKU FIT ― 運営：スリーイーデザイン</div><div>© 2026 スリーイーデザイン</div></div>
+</footer>
+</body>
+</html>
