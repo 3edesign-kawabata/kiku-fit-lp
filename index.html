@@ -193,6 +193,32 @@
     .statement small{display:block;margin-top:38px;color:var(--olive);font-size:14px;font-weight:800;letter-spacing:.05em}
     .statement p.statement-sub{margin:32px 0 0;max-width:620px;color:var(--black);font-size:19px;line-height:1.9;font-weight:600;letter-spacing:0}
 
+    .qa-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:54px}
+    .qa-tab{display:block;width:100%;padding:18px 18px;border:1px solid var(--line);background:var(--white);color:var(--gray);font-family:inherit;font-size:14px;font-weight:800;line-height:1.6;letter-spacing:.02em;text-align:left;cursor:pointer;appearance:none;transition:border-color .2s,color .2s}
+    .qa-tab:hover{border-color:var(--olive);color:var(--olive)}
+    .qa-tab.is-active{border-color:var(--olive);color:var(--olive)}
+    .qa-tab-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:22px;margin-bottom:10px;border:1px solid currentColor;font-size:11px;font-weight:900}
+
+    .qa-panel{display:none}
+    .qa-panel.is-active{display:grid;grid-template-columns:1fr 300px;gap:56px;align-items:start}
+
+    .qa-dialogue{display:flex;flex-direction:column;gap:16px}
+    .qa-line{display:flex;align-items:flex-start;gap:10px}
+    .qa-icon{flex:0 0 auto;width:22px;height:22px;margin-top:3px}
+    .qa-icon-q{color:#a9ab9c}
+    .qa-icon-a{color:var(--olive)}
+    .qa-label{flex:0 0 30px;margin:0;font-size:15px;font-weight:900}
+    .qa-q .qa-label{color:var(--gray)}
+    .qa-a .qa-label{color:var(--olive)}
+    .qa-text{flex:1;margin:0;font-size:16px;line-height:1.85}
+    .qa-q .qa-text{color:var(--gray)}
+    .qa-a .qa-text{color:var(--black);font-weight:600}
+
+    .qa-close{padding:32px 28px;border:1px solid var(--olive);background:var(--paper)}
+    .qa-close-q{margin:0 0 18px;color:var(--gray);font-size:15px;line-height:1.8}
+    .qa-close-a{margin:0;color:var(--olive);font-size:20px;font-weight:800;line-height:1.6;letter-spacing:-.01em}
+    .qa-close-note{margin:18px 0 0;padding-top:18px;border-top:1px solid var(--line);color:var(--gray);font-size:14px;line-height:1.85}
+
     .contact{padding:116px 0 78px;color:var(--black);background:var(--paper);border-bottom:0}
     .contact-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:76px;align-items:end}
     .contact h2{font-size:clamp(34px,4.6vw,60px)}
@@ -206,6 +232,7 @@
       .case-body{grid-column:2}
       .hero-bottom,.section-head,.contact-grid{grid-template-columns:1fr;gap:32px}
       .hero-side{padding-left:0;padding-top:24px;border-left:0;border-top:1px solid var(--line)}
+      .qa-panel.is-active{grid-template-columns:1fr;gap:32px}
     }
     @media(max-width:720px){
       .wrap{width:min(var(--max),calc(100% - 28px))}
@@ -232,6 +259,16 @@
       .case-title{font-size:clamp(19px,4.6vw,20px)}
       .statement p{font-size:clamp(24px,7.5vw,34px)}
       .contact h2{font-size:clamp(19px,5.6vw,22px)}
+      .qa-tabs{gap:8px;margin-bottom:36px}
+      .qa-tab{padding:12px 10px;font-size:12px}
+      .qa-tab-num{width:26px;height:18px;margin-bottom:8px;font-size:10px}
+      .qa-panel.is-active{gap:28px}
+      .qa-dialogue{gap:14px}
+      .qa-icon{width:18px;height:18px;margin-top:2px}
+      .qa-label{flex-basis:26px;font-size:14px}
+      .qa-text{font-size:15px}
+      .qa-close{padding:26px 22px}
+      .qa-close-a{font-size:18px}
     }
   </style>
 </head>
@@ -369,6 +406,198 @@
     </div>
   </section>
 
+  <section class="paper" id="case-studies">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-kicker">CASE STUDIES</div>
+        <h2>事例</h2>
+      </div>
+
+      <div class="qa-tabs" role="tablist">
+        <button type="button" class="qa-tab is-active" data-tab="1" role="tab" aria-selected="true">
+          <span class="qa-tab-num">01</span>ホームページの<br>目的整理
+        </button>
+        <button type="button" class="qa-tab" data-tab="2" role="tab" aria-selected="false">
+          <span class="qa-tab-num">02</span>ロゴの<br>コンセプト確認
+        </button>
+        <button type="button" class="qa-tab" data-tab="3" role="tab" aria-selected="false">
+          <span class="qa-tab-num">03</span>ネット回線<br>トラブル
+        </button>
+      </div>
+
+      <div class="qa-panels">
+        <div class="qa-panel is-active" data-panel="1">
+          <div class="qa-dialogue">
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">うちのホームページどう？<br>とりあえず業者さんに任せて作ったんだけど…</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">何が目的で作りましたか？<br>まず目的を整理してみましょう</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">いまは人が欲しいから<br>リクルート向けかな！</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">でしたらリクルート向けとして<br>何が必要か整理してみましょう</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">何が必要かな？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">若い子向けですか？<br>中途採用が目的ですか？<br>若い子向けなら<br>ご家族にも<br>安心してもらえる内容に<br>してみませんか？</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">それを元に<br>業者さんにお願いしてみよう</p>
+            </div>
+          </div>
+          <div class="qa-close">
+            <p class="qa-close-q">あれ？<br>スリーイーデザインに<br>頼まなくてもいいの？</p>
+            <p class="qa-close-a">いいんです<br>それがKIKU FITです</p>
+            <p class="qa-close-note">制作する側も<br>目的がわかれば<br>作りやすくなります<br>一度話してください<br>整理すれば意外とシンプルです</p>
+          </div>
+        </div>
+
+        <div class="qa-panel" data-panel="2">
+          <div class="qa-dialogue">
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">うちのロゴどうかな？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">コンセプトはありますか？</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">とりあえず業者さんに<br>任せて作ったんだけど…</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">一度コンセプトを<br>確認してみては<br>どうですか？</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">なんて聞けばいいかな？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">うちのロゴマークの<br>コンセプトは？<br>シンボルマークに<br>込めた意味は？<br>こんな聞き方が<br>おすすめです</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">名刺を作る時に<br>それっぽく作ってもらったから<br>コンセプトや意味は<br>特にないみたい</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">いまのロゴマークを分析して<br>意味を持たせて<br>みましょうか？</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">やってみたら<br>愛着が湧いてきたな…</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">よかったです<br>なんとなくのロゴマークに<br>価値が生まれましたね</p>
+            </div>
+          </div>
+          <div class="qa-close">
+            <p class="qa-close-q">あれ？<br>スリーイーデザインに<br>頼まなくてもいいの？</p>
+            <p class="qa-close-a">いいんです<br>それがKIKU FITです</p>
+            <p class="qa-close-note">意味のないデザインより<br>意味のあるデザインへ</p>
+          </div>
+        </div>
+
+        <div class="qa-panel" data-panel="3">
+          <div class="qa-dialogue">
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">ネット回線が<br>繋がらないんだけど…</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">一度ホームゲートウェイの<br>電源を切ってみてください</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">なにそれ？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">おそらく電話機の近くに<br>黒か白の四角い箱が<br>あるはずです</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">あった！<br>どうしたらいいの？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">思い切って<br>コンセントを抜いて<br>30秒放置しましょう</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">直った！</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">調子が悪い時は<br>コンセントを<br>抜いてみてください</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">ついでに娘が<br>一人暮らしするんだけど<br>Wi-Fiはどれがいい？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">使い方や住む場所によって<br>必要な回線も変わります<br>まずは契約内容を<br>確認しましょう</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">買おうとしてたWi-Fiより<br>安くすみそう！<br>ネットで買って送ろう</p>
+            </div>
+          </div>
+          <div class="qa-close">
+            <p class="qa-close-q">あれ？<br>スリーイーデザインに<br>頼まなくてもいいの？</p>
+            <p class="qa-close-a">いいんです<br>それがKIKU FITです</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="contact" id="contact">
     <div class="wrap contact-grid">
       <div>
@@ -385,5 +614,23 @@
 <footer>
   <div class="wrap footer-inner"><div>KIKU FIT ― 運営：スリーイーデザイン</div><div>© 2026 スリーイーデザイン</div></div>
 </footer>
+
+<script>
+(function(){
+  var tabs = document.querySelectorAll('.qa-tab');
+  var panels = document.querySelectorAll('.qa-panel');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var id = tab.getAttribute('data-tab');
+      tabs.forEach(function(t){ t.classList.remove('is-active'); t.setAttribute('aria-selected','false'); });
+      panels.forEach(function(p){ p.classList.remove('is-active'); });
+      tab.classList.add('is-active');
+      tab.setAttribute('aria-selected','true');
+      var panel = document.querySelector('.qa-panel[data-panel="' + id + '"]');
+      if(panel){ panel.classList.add('is-active'); }
+    });
+  });
+})();
+</script>
 </body>
 </html>
