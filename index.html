@@ -194,10 +194,10 @@
     .statement p.statement-sub{margin:32px 0 0;max-width:620px;color:var(--black);font-size:19px;line-height:1.9;font-weight:600;letter-spacing:0}
 
     .qa-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:54px}
-    .qa-tab{display:block;width:100%;padding:18px 18px;border:1px solid var(--line);background:var(--white);color:var(--gray);font-family:inherit;font-size:14px;font-weight:800;line-height:1.6;letter-spacing:.02em;text-align:left;cursor:pointer;appearance:none;transition:border-color .2s,color .2s}
+    .qa-tab{display:block;width:100%;min-height:64px;padding:18px 20px;border:1px solid var(--line);background:var(--white);color:var(--gray);font-family:inherit;font-size:13px;font-weight:800;line-height:1.7;letter-spacing:.02em;text-align:left;cursor:pointer;appearance:none;transition:border-color .2s,color .2s}
     .qa-tab:hover{border-color:var(--olive);color:var(--olive)}
     .qa-tab.is-active{border-color:var(--olive);color:var(--olive)}
-    .qa-tab-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:22px;margin-bottom:10px;border:1px solid currentColor;font-size:11px;font-weight:900}
+    .qa-tab-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:22px;margin-right:10px;border:1px solid currentColor;font-size:11px;font-weight:900}
 
     .qa-panel{display:none}
     .qa-panel.is-active{display:grid;grid-template-columns:1fr 300px;gap:56px;align-items:start}
@@ -259,9 +259,9 @@
       .case-title{font-size:clamp(19px,4.6vw,20px)}
       .statement p{font-size:clamp(24px,7.5vw,34px)}
       .contact h2{font-size:clamp(19px,5.6vw,22px)}
-      .qa-tabs{gap:8px;margin-bottom:36px}
-      .qa-tab{padding:12px 10px;font-size:12px}
-      .qa-tab-num{width:26px;height:18px;margin-bottom:8px;font-size:10px}
+      .qa-tabs{grid-template-columns:1fr;gap:8px;margin-bottom:36px}
+      .qa-tab{min-height:0;padding:13px 16px;font-size:13px;line-height:1.6}
+      .qa-tab-num{width:26px;height:18px;margin-right:8px;font-size:10px}
       .qa-panel.is-active{gap:28px}
       .qa-dialogue{gap:14px}
       .qa-icon{width:18px;height:18px;margin-top:2px}
@@ -415,13 +415,13 @@
 
       <div class="qa-tabs" role="tablist">
         <button type="button" class="qa-tab is-active" data-tab="1" role="tab" aria-selected="true">
-          <span class="qa-tab-num">01</span>ホームページの<br>目的整理
+          <span class="qa-tab-num">01</span>ホームページの目的整理
         </button>
         <button type="button" class="qa-tab" data-tab="2" role="tab" aria-selected="false">
-          <span class="qa-tab-num">02</span>ロゴの<br>コンセプト確認
+          <span class="qa-tab-num">02</span>ロゴのコンセプト確認
         </button>
         <button type="button" class="qa-tab" data-tab="3" role="tab" aria-selected="false">
-          <span class="qa-tab-num">03</span>ネット回線<br>トラブル
+          <span class="qa-tab-num">03</span>ネット回線トラブル
         </button>
       </div>
 
