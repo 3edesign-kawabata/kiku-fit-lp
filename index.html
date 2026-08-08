@@ -200,7 +200,7 @@
     .qa-tab-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:22px;margin-right:10px;border:1px solid currentColor;font-size:11px;font-weight:900}
 
     .qa-panel{display:none}
-    .qa-panel.is-active{display:grid;grid-template-columns:1fr 300px;gap:56px;align-items:start}
+    .qa-panel.is-active{display:flex;flex-direction:column;gap:40px}
 
     .qa-dialogue{display:flex;flex-direction:column;gap:16px}
     .qa-line{display:flex;align-items:flex-start;gap:10px}
@@ -214,7 +214,7 @@
     .qa-q .qa-text{color:var(--gray)}
     .qa-a .qa-text{color:var(--black);font-weight:600}
 
-    .qa-close{padding:32px 28px;border:1px solid var(--olive);background:var(--paper)}
+    .qa-close{align-self:flex-start;max-width:520px;margin-left:72px;padding-top:32px;border-top:1px solid var(--line)}
     .qa-close-q{margin:0 0 18px;color:var(--gray);font-size:15px;line-height:1.8}
     .qa-close-a{margin:0;color:var(--olive);font-size:20px;font-weight:800;line-height:1.6;letter-spacing:-.01em}
     .qa-close-note{margin:18px 0 0;padding-top:18px;border-top:1px solid var(--line);color:var(--gray);font-size:14px;line-height:1.85}
@@ -232,7 +232,7 @@
       .case-body{grid-column:2}
       .hero-bottom,.section-head,.contact-grid{grid-template-columns:1fr;gap:32px}
       .hero-side{padding-left:0;padding-top:24px;border-left:0;border-top:1px solid var(--line)}
-      .qa-panel.is-active{grid-template-columns:1fr;gap:32px}
+      .qa-panel.is-active{gap:32px}
     }
     @media(max-width:720px){
       .wrap{width:min(var(--max),calc(100% - 28px))}
@@ -267,7 +267,7 @@
       .qa-icon{width:18px;height:18px;margin-top:2px}
       .qa-label{flex-basis:26px;font-size:14px}
       .qa-text{font-size:15px}
-      .qa-close{padding:26px 22px}
+      .qa-close{margin-left:64px;padding-top:26px}
       .qa-close-a{font-size:18px}
     }
   </style>
@@ -422,6 +422,15 @@
         </button>
         <button type="button" class="qa-tab" data-tab="3" role="tab" aria-selected="false">
           <span class="qa-tab-num">03</span>ネット回線トラブル
+        </button>
+        <button type="button" class="qa-tab" data-tab="4" role="tab" aria-selected="false">
+          <span class="qa-tab-num">04</span>ロゴの綴りチェック
+        </button>
+        <button type="button" class="qa-tab" data-tab="5" role="tab" aria-selected="false">
+          <span class="qa-tab-num">05</span>看板撮影のクオリティ相談
+        </button>
+        <button type="button" class="qa-tab" data-tab="6" role="tab" aria-selected="false">
+          <span class="qa-tab-num">06</span>AI画像ロゴのデータ整理
         </button>
       </div>
 
@@ -591,6 +600,159 @@
           </div>
           <div class="qa-close">
             <p class="qa-close-q">あれ？<br>スリーイーデザインに<br>頼まなくてもいいの？</p>
+            <p class="qa-close-a">いいんです。<br>それがKIKU FITです。</p>
+          </div>
+        </div>
+
+        <div class="qa-panel" data-panel="4">
+          <div class="qa-dialogue">
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">知り合いがお店<br>出すんよ！<br>これがロゴだって！<br>感想聞かれてさ！<br>プロの目からしたらどう？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">拝見しますね。<br>このロゴには<br>どんな意味が<br>あるんですか？</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">わかんないけど<br>知り合いに<br>頼んだみたい！</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">なるほど！<br>1点気になるところが…<br>この名前なら<br>ローマ字表記の<br>つづりが違うと思います！<br>あえてそうしてるなら<br>いいと思いますけど！</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">ほんとや！<br>これ恥ずかしいやつやんw<br>教えてあげよ！<br>…やっぱり間違ってたみたい。<br>助かったって<br>喜んでたよ！</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">よかったですね！<br>僕が細かいこと<br>気になるんです<br>すいませんw</p>
+            </div>
+          </div>
+          <div class="qa-close">
+            <p class="qa-close-q">あれ？<br>スリーイーデザインに<br>頼まなくてもいいの？</p>
+            <p class="qa-close-a">いいんです。<br>それがKIKU FITです。</p>
+          </div>
+        </div>
+
+        <div class="qa-panel" data-panel="5">
+          <div class="qa-dialogue">
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">5mの看板を作りたいんだけど<br>看板屋さんに<br>写真はiPhoneで撮れば大丈夫って<br>言われたんだけど大丈夫かな？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">それは危険かもしれません！</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">なんで？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">iPhoneは自動で補正がかかるので<br>その場で見る分には<br>きれいに見えるんです。<br>でも大きく引き伸ばすと<br>粗いのが目立ってきます。<br>意外と見落とされがちな<br>ポイントなんです。</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">看板屋さんに聞いてみたら<br>近くで見たら粗いけど<br>5〜6m離れたら<br>大丈夫って言われた！</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">どこに設置しますか？</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">お客さんが<br>近くを通るから<br>写真が粗いのは<br>いやだな。</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">そうなると<br>iPhoneではなくて<br>一眼レフでの撮影の方が<br>おすすめです！<br>何パターンか<br>イメージ作って<br>ご提案しましょうか？</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">お願いできる？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">有料になりますが<br>一眼レフで撮影しますよ！<br>看板屋さんに<br>データ納品しますよ！</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">そこまでやってくれるんだ！</p>
+            </div>
+          </div>
+          <div class="qa-close">
+            <p class="qa-close-q">あれ？<br>看板はスリーイーデザインに<br>頼まなくてもいいの？</p>
+            <p class="qa-close-a">いいんです。<br>それがKIKU FITです。</p>
+            <p class="qa-close-note">用途まで考えた撮影を。</p>
+          </div>
+        </div>
+
+        <div class="qa-panel" data-panel="6">
+          <div class="qa-dialogue">
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">AIでロゴ作ったんだけど<br>プリント屋さんに<br>四角で貼り付けていいですか<br>って聞かれて…<br>どういうこと？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">たぶん背景が<br>白いままなんだと思います。<br>白い部分を透明にしないと<br>四角く貼り付いちゃうんです。</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">言われるまで<br>気づかなかった…</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">白い背景だと<br>気づきにくいんです。<br>AIで作ったロゴは<br>背景がついたままなことが<br>よくあります。</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">じゃあどうすればいいの？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">まずはプリント屋さんへ<br>お願いしてみては？</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">確認してみます！<br>…できないって言われた…</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">そうなんですね！<br>有料になりますが<br>データだけお作り<br>しましょうか？</p>
+            </div>
+          </div>
+          <div class="qa-close">
+            <p class="qa-close-q">あれ？<br>プリントはスリーイーデザインに<br>頼まなくてもいいの？</p>
             <p class="qa-close-a">いいんです。<br>それがKIKU FITです。</p>
           </div>
         </div>
