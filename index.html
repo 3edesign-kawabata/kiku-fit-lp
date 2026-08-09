@@ -98,7 +98,7 @@
     .hero-text-pad{padding-left:max(28px,calc((100vw - 1180px)/2))}
     .hero-media{position:relative}
     .hero-media .photo-block{aspect-ratio:auto;height:100%}
-    .hero-media-fade{position:absolute;inset:0;background:linear-gradient(90deg,var(--white) 0%,rgba(255,255,255,.2) 12%,rgba(255,255,255,0) 38%)}
+    .hero-media-fade{position:absolute;inset:0;background:linear-gradient(90deg,var(--white) 0%,rgba(255,255,255,.9) 10%,rgba(255,255,255,.55) 22%,rgba(255,255,255,.22) 34%,rgba(255,255,255,0) 52%)}
     .hero .photo-block{object-position:65% center}
 
     .hero-lead{
@@ -218,7 +218,7 @@
     .statement-media-fade{position:absolute;inset:0;background:linear-gradient(100deg,var(--black) 0%,rgba(30,31,26,.82) 16%,rgba(30,31,26,0) 46%)}
     .statement-en{position:relative;z-index:3;margin:0 0 22px;font-size:clamp(40px,4.4vw,72px);line-height:.95;letter-spacing:-.03em;font-weight:900;color:var(--white)}
     .statement p{margin:0;font-size:clamp(26px,2.6vw,38px);line-height:1.34;letter-spacing:-.03em;font-weight:800;color:var(--white)}
-    .statement small{display:block;margin-top:38px;color:#cfe0c9;font-size:14px;font-weight:800;letter-spacing:.05em}
+    .statement small{display:block;margin-top:38px;color:var(--white);font-size:14px;font-weight:800;letter-spacing:.05em}
     .statement p.statement-sub{margin:28px 0 0;color:rgba(255,255,255,.86);font-size:17px;line-height:1.9;font-weight:600;letter-spacing:0}
     .statement-inline{margin-top:64px}
     .statement.mirror .statement-media{left:0;right:auto;clip-path:polygon(0% 0%,100% 0%,70% 100%,0% 100%)}
@@ -271,7 +271,7 @@
       .qa-panel.is-active{gap:32px}
       .statement{padding-bottom:0;min-height:0}
       .statement-text{max-width:none}
-      .statement-media{position:static;width:100%;height:auto;aspect-ratio:3/2;clip-path:none;margin-top:40px}
+      .statement-media,.statement.mirror .statement-media{position:static;width:100%;height:auto;aspect-ratio:3/2;clip-path:none;margin-top:40px}
       .statement-media img.zoom-tight{transform:none}
       .statement-media-fade{display:none}
     }
