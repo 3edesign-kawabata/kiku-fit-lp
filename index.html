@@ -93,9 +93,13 @@
       font-weight:800;
     }
     h1 span{display:block;white-space:nowrap}
-    .split{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:stretch}
     .photo-block{display:block;width:100%;aspect-ratio:3/2;object-fit:cover}
-    .split .photo-block{aspect-ratio:auto;height:100%}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:stretch}
+    .hero-text-pad{padding-left:max(28px,calc((100vw - 1180px)/2))}
+    .hero-media{position:relative}
+    .hero-media .photo-block{aspect-ratio:auto;height:100%}
+    .hero-media-fade{position:absolute;inset:0;background:linear-gradient(90deg,var(--white) 0%,rgba(255,255,255,0) 14%)}
+    .hero .photo-block{object-position:65% center}
 
     .hero-lead{
       margin:20px 0 0;
@@ -140,7 +144,7 @@
     .section-title-lines span{display:block}
     .section-title-lines{font-size:clamp(27px,3vw,40px);line-height:1.35;text-wrap:balance}
 
-    #about{background:var(--olive);color:var(--white);border-bottom-color:rgba(255,255,255,.2);padding-bottom:0}
+    #about{background:var(--olive);color:var(--white);border-bottom:0;padding-bottom:0}
     #about .section-kicker{color:#cfe0c9}
     #about h2{color:var(--white)}
     .cases{border-top:3px solid rgba(255,255,255,.35)}
@@ -176,9 +180,7 @@
     .case-body strong{display:block;margin-bottom:10px;color:var(--white);font-size:clamp(17px,1.6vw,18px);line-height:1.55;text-wrap:pretty}
     .case-body p{margin:0 0 16px}
     .case-body p:last-child{margin-bottom:0}
-    .band{margin-top:64px}
-
-    .dark{color:var(--black);background:var(--paper);border-bottom:1px solid var(--olive);padding-bottom:0}
+    .dark{color:var(--black);background:var(--paper);border-bottom:0;padding-bottom:0}
     .process{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
     .process-item{min-height:310px;padding:30px 28px;border-right:1px solid var(--line)}
     .process-item:last-child{border-right:0}
@@ -206,16 +208,22 @@
       user-select:none;
     }
 
-    .statement{position:relative;overflow:hidden;padding:124px 0;color:var(--white);background:var(--black);border-bottom:1px solid var(--olive)}
+    .statement{position:relative;overflow:hidden;min-height:640px;padding:124px 0;color:var(--white);background:var(--black);border-bottom:1px solid var(--olive)}
     .statement .wrap{position:relative;z-index:2}
     .statement-text{max-width:600px}
     .statement-media{position:absolute;top:0;right:0;height:100%;width:72%;z-index:1;clip-path:polygon(0% 0%,100% 0%,100% 100%,30% 100%)}
     .statement-media img{display:block;width:100%;height:100%;object-fit:cover}
+    .statement-media img.crop-top{object-position:center 20%}
+    .statement-media img.zoom-tight{transform:scale(1.45);transform-origin:center 12%}
     .statement-media-fade{position:absolute;inset:0;background:linear-gradient(100deg,var(--black) 0%,rgba(30,31,26,.82) 16%,rgba(30,31,26,0) 46%)}
     .statement-en{position:relative;z-index:3;margin:0 0 22px;font-size:clamp(40px,4.4vw,72px);line-height:.95;letter-spacing:-.03em;font-weight:900;color:var(--white)}
     .statement p{margin:0;font-size:clamp(26px,2.6vw,38px);line-height:1.34;letter-spacing:-.03em;font-weight:800;color:var(--white)}
     .statement small{display:block;margin-top:38px;color:#cfe0c9;font-size:14px;font-weight:800;letter-spacing:.05em}
     .statement p.statement-sub{margin:28px 0 0;color:rgba(255,255,255,.86);font-size:17px;line-height:1.9;font-weight:600;letter-spacing:0}
+    .statement-inline{margin-top:64px}
+    .statement.mirror .statement-media{left:0;right:auto;clip-path:polygon(0% 0%,100% 0%,70% 100%,0% 100%)}
+    .statement.mirror .statement-media-fade{background:linear-gradient(260deg,var(--black) 0%,rgba(30,31,26,.82) 16%,rgba(30,31,26,0) 46%)}
+    .statement.mirror .statement-text{margin-left:auto}
 
     .qa-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:54px}
     .qa-tab{display:block;width:100%;min-height:64px;padding:18px 20px;border:1px solid var(--line);background:var(--white);color:var(--gray);font-family:inherit;font-size:13px;font-weight:800;line-height:1.7;letter-spacing:.02em;text-align:left;cursor:pointer;appearance:none;transition:border-color .2s,color .2s}
@@ -243,8 +251,6 @@
     .qa-close-a{margin:0;color:var(--olive);font-size:20px;font-weight:800;line-height:1.6;letter-spacing:-.01em}
     .qa-close-note{margin:18px 0 0;padding-top:18px;border-top:1px solid var(--line);color:var(--gray);font-size:14px;line-height:1.85}
 
-    .photo-band{padding:0;line-height:0;border-bottom:1px solid var(--olive)}
-
     .contact{padding:116px 0 78px;color:var(--black);background:var(--paper);border-bottom:0}
     .contact-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:76px;align-items:end}
     .contact h2{font-size:clamp(34px,4.6vw,60px)}
@@ -256,12 +262,17 @@
     @media(max-width:980px){
       .case{grid-template-columns:110px 1fr}
       .case-body{grid-column:2}
-      .split,.section-head,.contact-grid{grid-template-columns:1fr;gap:32px}
-      .split .photo-block{aspect-ratio:3/2;height:auto}
+      .hero-grid,.section-head,.contact-grid{grid-template-columns:1fr;gap:32px}
+      .hero-grid{width:min(var(--max),calc(100% - 56px));margin:auto}
+      .hero-text-pad{padding-left:0}
+      .hero-media{position:static}
+      .hero-media .photo-block{aspect-ratio:3/2;height:auto}
+      .hero-media-fade{display:none}
       .qa-panel.is-active{gap:32px}
-      .statement{padding-bottom:0}
+      .statement{padding-bottom:0;min-height:0}
       .statement-text{max-width:none}
       .statement-media{position:static;width:100%;height:auto;aspect-ratio:3/2;clip-path:none;margin-top:40px}
+      .statement-media img.zoom-tight{transform:none}
       .statement-media-fade{display:none}
     }
     @media(max-width:720px){
@@ -271,7 +282,7 @@
       .hero{min-height:auto;padding:64px 0 60px}
       h1{font-size:clamp(44px,13vw,68px)}
       h1 span{white-space:normal}
-      .split{gap:32px}
+      .hero-grid{gap:32px;width:min(var(--max),calc(100% - 28px))}
       section{padding:82px 0}
       .section-head{margin-bottom:44px}
       .case{grid-template-columns:1fr;gap:14px;padding:34px 0}
@@ -300,7 +311,7 @@
       .qa-close{margin-left:64px;padding-top:26px}
       .qa-close-a{font-size:18px}
       .statement-en{font-size:clamp(34px,11vw,52px);margin-bottom:14px}
-      .band{margin-top:36px}
+      .statement-inline{margin-top:36px}
     }
   </style>
 </head>
@@ -309,8 +320,8 @@
   <div class="wrap header-inner">
     <a class="logo" href="#top">KIKU FIT</a>
     <nav>
-      <a href="#about">KIKU FITとは</a>
       <a href="#service">サービス内容</a>
+      <a href="#about">KIKU FITとは</a>
       <a class="nav-cta" href="#contact">ご利用について</a>
     </nav>
   </div>
@@ -318,8 +329,8 @@
 
 <main id="top">
   <section class="hero">
-    <div class="wrap split">
-      <div class="split-text">
+    <div class="hero-grid">
+      <div class="split-text hero-text-pad">
         <div class="hero-topline">KIKU + FIT</div>
         <h1><span>作る前に</span><span>目的を整える</span></h1>
         <p class="hero-lead">
@@ -334,7 +345,50 @@
           <p>まず聞く<br>あなたに合った提案をする<br>それが、KIKU FIT<br><br>スリーイーデザインが提供するサービスです</p>
         </div>
       </div>
-      <img class="photo-block" src="images/hero-portrait.jpg" alt="スリーイーデザイン担当者">
+      <div class="hero-media">
+        <img class="photo-block" src="images/hero-portrait.jpg" alt="スリーイーデザイン担当者">
+        <div class="hero-media-fade"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark" id="service">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-kicker">HOW IT WORKS</div>
+        <h2>最初にするのは<br>提案ではなくヒアリングです</h2>
+      </div>
+      <div class="process">
+        <article class="process-item">
+          <div class="process-num">01</div>
+          <h3>事前相談</h3>
+          <p>見積もりや提案書が届いた。内容を一緒に見て、分かる言葉に整理します。</p>
+        </article>
+        <article class="process-item">
+          <div class="process-num">02</div>
+          <h3>打ち合わせ支援</h3>
+          <p>打ち合わせで聞いておきたいことを整理し、終わったあとに内容を確認します。</p>
+        </article>
+        <article class="process-item">
+          <div class="process-num">03</div>
+          <h3>返信のアドバイス</h3>
+          <p>伝えたいことを整理して、返信の内容を一緒に考えます。</p>
+        </article>
+      </div>
+    </div>
+    <div class="statement statement-inline">
+      <div class="wrap">
+        <div class="statement-text">
+          <div class="statement-en">ORGANIZE FIRST</div>
+          <p>提案より先に<br>状況を整理する</p>
+          <p class="statement-sub">見積もりも、打ち合わせも、返信も<br>ひとりで抱え込まなくていい<br>聞いた内容をその場で整理し<br>次の一歩を一緒に考えます</p>
+          <small>KIKU FIT</small>
+        </div>
+      </div>
+      <div class="statement-media">
+        <img src="images/imac-work.jpg" alt="打ち合わせ内容を整理する様子" loading="lazy">
+        <div class="statement-media-fade"></div>
+      </div>
     </div>
   </section>
 
@@ -377,34 +431,20 @@
         </article>
       </div>
     </div>
-    <img class="photo-block band" src="images/food-shoot.jpg" alt="撮影の様子" loading="lazy">
-  </section>
-
-  <section class="dark" id="service">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-kicker">HOW IT WORKS</div>
-        <h2>最初にするのは<br>提案ではなくヒアリングです</h2>
+    <div class="statement mirror statement-inline">
+      <div class="wrap">
+        <div class="statement-text">
+          <div class="statement-en">SEE THE DETAIL</div>
+          <p>きれいに撮る前に<br>何を見せたいかを整理する</p>
+          <p class="statement-sub">メニューも、看板も、SNSも<br>雰囲気だけでは伝わりません<br>光や構図、仕上がりまで考えて<br>伝わる1枚に仕上げます</p>
+          <small>KIKU FIT</small>
+        </div>
       </div>
-      <div class="process">
-        <article class="process-item">
-          <div class="process-num">01</div>
-          <h3>事前相談</h3>
-          <p>見積もりや提案書が届いた。内容を一緒に見て、分かる言葉に整理します。</p>
-        </article>
-        <article class="process-item">
-          <div class="process-num">02</div>
-          <h3>打ち合わせ支援</h3>
-          <p>打ち合わせで聞いておきたいことを整理し、終わったあとに内容を確認します。</p>
-        </article>
-        <article class="process-item">
-          <div class="process-num">03</div>
-          <h3>返信のアドバイス</h3>
-          <p>伝えたいことを整理して、返信の内容を一緒に考えます。</p>
-        </article>
+      <div class="statement-media">
+        <img class="crop-top" src="images/food-shoot.jpg" alt="撮影の様子" loading="lazy">
+        <div class="statement-media-fade"></div>
       </div>
     </div>
-    <img class="photo-block band" src="images/imac-work.jpg" alt="打ち合わせ内容を整理する様子" loading="lazy">
   </section>
 
   <section class="paper" id="consultation">
@@ -513,7 +553,12 @@
             <div class="qa-line qa-q">
               <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
               <p class="qa-label">Q.</p>
-              <p class="qa-text">それを元に<br>業者さんにお願いしてみましょう！</p>
+              <p class="qa-text">そうしてみようかな！<br>相談だけ乗ってもらって<br>大丈夫？</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">大丈夫ですよ！<br>目的をまとめてから<br>業者さんに<br>お願いしてみましょう！</p>
             </div>
           </div>
           <div class="qa-close">
@@ -726,7 +771,7 @@
             <div class="qa-line qa-a">
               <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
               <p class="qa-label">A.</p>
-              <p class="qa-text">そうなると<br>iPhoneではなくて<br>一眼レフでの撮影の方が<br>おすすめです！<br>何パターンか<br>イメージ作って<br>ご提案しましょうか？</p>
+              <p class="qa-text">そうなると<br>iPhoneではなくて<br>一眼レフでの撮影の方が<br>おすすめです！</p>
             </div>
             <div class="qa-line qa-q">
               <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
@@ -736,12 +781,22 @@
             <div class="qa-line qa-a">
               <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
               <p class="qa-label">A.</p>
-              <p class="qa-text">有料になりますが<br>一眼レフで撮影しますよ！<br>看板屋さんに<br>データ納品しますよ！</p>
+              <p class="qa-text">有料になりますが<br>可能ですよ！<br>何パターンか<br>イメージ作って<br>ご提案しましょうか？<br>決定したら看板屋さんに<br>データ納品しますよ！</p>
             </div>
             <div class="qa-line qa-q">
               <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
               <p class="qa-label">Q.</p>
               <p class="qa-text">そこまでやってくれるんだ！</p>
+            </div>
+            <div class="qa-line qa-a">
+              <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">A.</p>
+              <p class="qa-text">話しながら<br>仕上がりのイメージも<br>整理してみましょう！</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">相談してよかった！</p>
             </div>
           </div>
           <div class="qa-close">
@@ -791,7 +846,12 @@
             <div class="qa-line qa-a">
               <span class="qa-icon qa-icon-a"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
               <p class="qa-label">A.</p>
-              <p class="qa-text">そうなんですね！<br>有料になりますが<br>データだけお作り<br>しましょうか？</p>
+              <p class="qa-text">そうなんですね！<br>有料になりますが<br>プリント用の<br>納品データ作りましょうか？</p>
+            </div>
+            <div class="qa-line qa-q">
+              <span class="qa-icon qa-icon-q"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 5h16v11H9l-4 4v-4H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+              <p class="qa-label">Q.</p>
+              <p class="qa-text">納品データとか<br>完全入稿とか<br>わかんなかったから<br>たすかる！</p>
             </div>
           </div>
           <div class="qa-close">
@@ -803,8 +863,18 @@
     </div>
   </section>
 
-  <section class="photo-band">
-    <img class="photo-block" src="images/phone-call.jpg" alt="電話で相談を受ける様子" loading="lazy">
+  <section class="statement">
+    <div class="wrap">
+      <div class="statement-text">
+        <div class="statement-en">JUST ASK</div>
+        <p class="statement-sub">聞くだけでも大丈夫です<br>まずは、お気軽にご連絡ください</p>
+        <small>KIKU FIT</small>
+      </div>
+    </div>
+    <div class="statement-media">
+      <img class="crop-top zoom-tight" src="images/phone-call.jpg" alt="電話で相談を受ける様子" loading="lazy">
+      <div class="statement-media-fade"></div>
+    </div>
   </section>
 
   <section class="contact" id="contact">
