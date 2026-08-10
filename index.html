@@ -21,6 +21,7 @@
     html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
     body{
       margin:0;
+      overflow-x:hidden;
       color:var(--black);
       background:var(--white);
       font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
@@ -256,10 +257,10 @@
       .hero-grid,.section-head,.contact-grid{grid-template-columns:1fr;gap:32px}
       .hero-grid{width:min(var(--max),calc(100% - 56px));margin:auto}
       .hero-text-pad{padding-left:0;display:contents}
-      .hero-media{position:static;order:1;margin:0}
+      .hero-media{position:static;order:1;margin-top:0;margin-bottom:0;width:calc(100% + 56px);margin-left:-28px;margin-right:-28px}
       .hero-media .photo-block{aspect-ratio:4/5;height:auto}
       .hero-media-fade{display:none}
-      .hero-side{order:2}
+      .hero-side{order:2;border-top:0;padding-top:0}
       .qa-panel.is-active{gap:32px}
       .statement{padding-bottom:0;min-height:0;display:flex;flex-direction:column}
       .statement-inline{margin-top:0}
@@ -278,6 +279,7 @@
       h1{font-size:clamp(44px,13vw,68px)}
       h1 span{white-space:normal}
       .hero-grid{gap:32px;width:min(var(--max),calc(100% - 28px))}
+      .hero-media{width:calc(100% + 28px);margin-left:-14px;margin-right:-14px}
       section{padding:80px 0}
       .section-head{margin-bottom:44px}
       .case{grid-template-columns:1fr;gap:14px;padding:34px 0}
