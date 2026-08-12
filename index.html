@@ -157,11 +157,13 @@
       border-bottom:1px solid rgba(255,255,255,.22);
       align-items:start;
     }
-    .case-no{display:flex;align-items:center;gap:10px}
+    .case-head{grid-column:1 / 3;display:flex;align-items:center;gap:38px}
+    .case-no{flex:0 0 138px;display:flex;align-items:center;gap:10px}
     .case-no-num,.process-num,.point span,.qa-tab-num{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-size:14px;font-weight:900}
     .case-no-num{background:var(--white);color:var(--olive)}
     .case-no-cat{color:rgba(255,255,255,.8);font-size:11px;font-weight:900;letter-spacing:.14em}
     .case-title{
+      flex:1;
       font-size:clamp(19px,2vw,26px);
       line-height:1.5;
       font-weight:800;
@@ -255,6 +257,7 @@
     @media(max-width:980px){
       .case{grid-template-columns:110px 1fr}
       .case-body{grid-column:2}
+      .case-no{flex-basis:110px}
       .hero-grid,.section-head,.contact-grid{grid-template-columns:1fr;gap:32px}
       .hero-grid{width:min(var(--max),calc(100% - 56px));margin:auto}
       .hero-text-pad{padding-left:0;display:contents}
@@ -285,6 +288,8 @@
       .section-head{margin-bottom:44px}
       .case{grid-template-columns:1fr;gap:14px;padding:34px 0}
       .case-body{grid-column:auto}
+      .case-head{flex-direction:column;align-items:flex-start;gap:14px}
+      .case-no{flex-basis:auto}
       .process,.point-grid{grid-template-columns:1fr}
       .process-item{min-height:auto;border-right:0;border-bottom:1px solid var(--line)}
       .process-item:last-child{border-bottom:0}
@@ -399,8 +404,10 @@
 
       <div class="cases">
         <article class="case">
-          <div class="case-no"><span class="case-no-num">01</span><span class="case-no-cat">WEB</span></div>
-          <div class="case-title">わからない言葉を<br>聞いて整理します</div>
+          <div class="case-head">
+            <div class="case-no"><span class="case-no-num">01</span><span class="case-no-cat">WEB</span></div>
+            <div class="case-title">わからない言葉を<br>聞いて整理します</div>
+          </div>
           <div class="case-body">
             <strong>家に例えると、分かりやすくなります。</strong>
             <p>サーバーは土地、ドメインは住所、ホームページは建物です。</p>
@@ -409,8 +416,10 @@
         </article>
 
         <article class="case">
-          <div class="case-no"><span class="case-no-num">02</span><span class="case-no-cat">DESIGN</span></div>
-          <div class="case-title">見た目より先に<br>伝えたいことを聞きます</div>
+          <div class="case-head">
+            <div class="case-no"><span class="case-no-num">02</span><span class="case-no-cat">DESIGN</span></div>
+            <div class="case-title">見た目より先に<br>伝えたいことを聞きます</div>
+          </div>
           <div class="case-body">
             <strong>誰に、何を、どう伝えるのか？</strong>
             <p>目的が曖昧なままでは、きれいに作っても機能しません。</p>
@@ -419,8 +428,10 @@
         </article>
 
         <article class="case">
-          <div class="case-no"><span class="case-no-num">03</span><span class="case-no-cat">SNS</span></div>
-          <div class="case-title">始める前に<br>目的を聞きます</div>
+          <div class="case-head">
+            <div class="case-no"><span class="case-no-num">03</span><span class="case-no-cat">SNS</span></div>
+            <div class="case-title">始める前に<br>目的を聞きます</div>
+          </div>
           <div class="case-body">
             <strong>集客なのか、採用なのか？</strong>
             <p>目的によって発信する内容も、使う媒体も、続け方も変わります。</p>
