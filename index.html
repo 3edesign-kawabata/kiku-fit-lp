@@ -116,13 +116,26 @@
     .name-origin span:nth-child(2){color:var(--olive)}
     .hero-side p{margin:0;color:var(--gray);font-size:15px;line-height:1.9}
 
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}
-    .reveal.is-visible{opacity:1;transform:translateY(0)}
-    .reveal.d1{transition-delay:.12s}
-    .reveal.d2{transition-delay:.24s}
-    .reveal.d3{transition-delay:.36s}
-    .reveal.d4{transition-delay:.48s}
-    .reveal.d5{transition-delay:.6s}
+    /* motion: 初期状態の非表示はJS側で付与（JSなしでも全表示） */
+    .rv-line{display:inline-block}
+    .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+    .hero-media,.statement-media{overflow:hidden}
+    :root{--m-char-dur:.9s;--m-char-step:.03s}
+    .ch{display:inline-block}
+    .ch-ready .ch-line{-webkit-clip-path:inset(-.3em -.3em 0 -.3em);clip-path:inset(-.3em -.3em 0 -.3em)}
+    .ch-ready .ch{transform:translate3d(0,105%,0)}
+    .ch-ready.ch-go .ch{transform:none;transition:transform var(--m-char-dur) cubic-bezier(.16,1,.3,1) calc(var(--i,0) * var(--m-char-step))}
+    .process-item{transform-origin:50% 100%}
+    #about{overflow-x:clip}
+    :root{--m-slot-dur:.8s;--m-slot-angle:25deg;--m-slot-step:.12s}
+    .slot-host{overflow:hidden}
+    :root{--m-pop-from:.92;--m-pop-dur:.55s;--m-pop-step:.08s}
+    .pop-ready{opacity:0;transform:scale(var(--m-pop-from));transform-origin:0 50%}
+    .pop-ready.is-pop{opacity:1;transform:none;transition:opacity .3s ease-out calc(var(--i,0) * var(--m-pop-step)),transform var(--m-pop-dur) cubic-bezier(.34,1.56,.64,1) calc(var(--i,0) * var(--m-pop-step))}
+    .point span.slot{display:inline-block;width:auto;height:auto;border-radius:0;background:none}
+    .slot-ready .slot{transform:perspective(200px) translate3d(0,-110%,0) rotateX(var(--m-slot-angle))}
+    .slot-ready.slot-go .slot{transform:none;transition:transform var(--m-slot-dur) cubic-bezier(.3,1.45,.5,1) calc(var(--i,0) * var(--m-slot-step))}
+    header.is-scrolled{background:rgba(255,255,255,.72);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}
 
     section{padding:116px 0;border-bottom:1px solid var(--olive)}
     .paper{background:var(--paper)}
@@ -231,7 +244,6 @@
     .qa-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:54px}
     .qa-tab{display:block;width:100%;min-height:64px;padding:18px 20px;border:1px solid var(--line);background:var(--white);color:var(--gray);font-family:inherit;font-size:13px;font-weight:800;line-height:1.7;letter-spacing:.02em;text-align:left;cursor:pointer;appearance:none;transition:border-color .2s,color .2s}
     .qa-tab:hover{border-color:var(--olive);color:var(--olive)}
-    .qa-tab.reveal{transition-property:border-color,color,opacity,transform;transition-duration:.2s,.2s,.5s,.5s;transition-timing-function:ease,ease,ease-out,ease-out}
     .qa-tab.is-active{border-color:var(--olive);color:var(--olive)}
     .qa-tab-num{margin-right:10px;background:var(--olive);color:var(--white)}
 
@@ -278,6 +290,7 @@
       .statement{padding-bottom:0;min-height:0;display:flex;flex-direction:column}
       .statement-inline{margin-top:0}
       .statement .wrap,.statement-text{display:contents}
+      .statement-text>*{padding-left:28px;padding-right:28px}
       .statement-media,.statement.mirror .statement-media{position:static;display:flex;align-items:center;width:100%;height:auto;aspect-ratio:4/5;clip-path:none;margin-bottom:32px;order:1}
       .statement p.statement-sub,.statement small{order:2}
       .statement-media img.zoom-tight{transform:none}
@@ -286,6 +299,7 @@
     }
     @media(max-width:720px){
       .wrap{width:min(var(--max),calc(100% - 28px))}
+      .statement-text>*{padding-left:14px;padding-right:14px}
       nav a:not(.nav-cta){display:none}
       .logo small{display:none}
       .hero{min-height:auto;padding:64px 0 60px}
@@ -496,8 +510,8 @@
     <div class="wrap">
       <div class="statement-text">
         <div class="statement-en reveal">LISTEN FIRST</div>
-        <p class="reveal d1">何を作りますかより先に<br>何をしたいですかを聞く</p>
-        <p class="statement-sub reveal d1">ホームページも、デザインも、SNSも<br>伝わらない言葉を、伝わる言葉に<br>発注する側と制作会社の間に立って<br>内容を整理します</p>
+        <p class="reveal d1" data-ink>何を作りますかより先に<br>何をしたいですかを聞く</p>
+        <p class="statement-sub reveal d1" data-ink>ホームページも、デザインも、SNSも<br>伝わらない言葉を、伝わる言葉に<br>発注する側と制作会社の間に立って<br>内容を整理します</p>
         <small class="reveal d1">KIKU FIT</small>
       </div>
     </div>
@@ -909,20 +923,363 @@
 
 <script>
 (function(){
-  var revealEls = document.querySelectorAll('.reveal');
-  if(!('IntersectionObserver' in window)){
-    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
-  } else {
-    var io = new IntersectionObserver(function(entries, observer){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
-    revealEls.forEach(function(el){ io.observe(el); });
+  // ===== 動きの調整値（強さはここでまとめて変更） =====
+  var M = {
+    rise: 70,             // テキストが下から上がる距離(px)
+    revealStart: .98,     // 表示開始：要素の上端が画面のこの位置（高さ比）
+    revealEnd: .55,       // 表示完了
+    stepGroup: .04,       // d1〜d5 の時間差（画面高さ比）
+    stepLine: .03,        // 見出しの行ごとの時間差
+    stepMax: .2,
+    photoZoom: .12,       // 写真：スクロールで (1+値) → 1.0
+    photoZoomSoft: .05,   // food-shoot / statement-listen は控えめ
+    heroShift: .18,       // ヒーロー文字の視差（スクロール量に対する比）
+    heroFadeFrom: .35,    // ヒーロー見出しが薄くなり始める位置（ヒーロー高さ比）
+    heroFadeLen: .45,
+    heroZoomTo: 1.08,     // ヒーロー写真のゆっくりズーム 1.0 → この値
+    heroZoomMs: 8000,
+    inkFrom: .85,         // LISTEN FIRST 灰→白：開始位置（高さ比）
+    inkLen: .3,
+    inkSoft: 6,           // 灰→白のぼかし幅（文字数）
+    inkMin: .3,           // 灰色時の不透明度
+    tiltX: 20,            // HOW IT WORKS：奥から立ち上がる角度(deg) → 0
+    perspective: 900,     // 3D の奥行き(px)
+    wipeFrom: .9,         // ORGANIZE FIRST 写真のワイプ：枠の上端がこの位置で開始（高さ比）
+    wipeTo: .4,           //   この位置で全開
+    caseX: 60,            // WHY KIKU FIT ケース：横からの距離(px)
+    caseRot: 5,           //   傾き(deg) → 0
+    winInset: 18,         // SEE THE DETAIL 写真：角丸の窓の内側余白(%) → 0
+    winRadius: 28,        //   角丸(px) → 0
+    winFrom: .95,         //   枠の上端がこの位置で開始（高さ比）
+    winTo: .35,           //   この位置で枠いっぱい
+    askZoomTo: 1.06,      // JUST ASK 写真：画面に入ったら 1.0 → この値へゆっくりズーム（1回）
+    askZoomMs: 9000,
+    markShift: 120        // CONSULTATION 透かし文字：左右に流れる最大距離(px)。文字が切れない範囲に自動で制限
+  };
+  // ※ 時間で動くもの（文字のせり上がり・スロット・吹き出し）は CSS の --m-* 変数で調整
+  var easeOut = function(q){ return 1 - Math.pow(1 - q, 3); };
+
+  var header = document.querySelector('header');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motion = !reduce && ('IntersectionObserver' in window);
+  var mq = window.matchMedia('(max-width:980px)');
+  var slice = function(l){ return Array.prototype.slice.call(l); };
+  var clamp = function(v){ return v < 0 ? 0 : v > 1 ? 1 : v; };
+  var now = function(){ return window.performance ? performance.now() : Date.now(); };
+  var vh = window.innerHeight, maxScroll = 0, ticking = false, needMeasure = false, scrolled = null, zoomRunning = false;
+  var items = [], photos = [], ink = null, hero = null, mark = null;
+
+  function absTop(el){ var t = 0; while(el){ t += el.offsetTop; el = el.offsetParent; } return t; }
+  function stagger(el){ var m = el.className.match(/\bd(\d)\b/); return m ? +m[1] : 0; }
+
+  // <br>区切りの各行を span で包む（文言はそのまま）
+  function wrapLines(el){
+    var lines = [], buf = [];
+    function flush(){
+      if(!buf.length) return;
+      var s = document.createElement('span'); s.className = 'rv-line';
+      el.insertBefore(s, buf[0]);
+      buf.forEach(function(n){ s.appendChild(n); });
+      lines.push(s); buf = [];
+    }
+    slice(el.childNodes).forEach(function(n){ if(n.nodeName === 'BR') flush(); else buf.push(n); });
+    flush();
+    return lines;
   }
+  function linesOf(el){
+    if(el.classList.contains('section-title-lines')) return slice(el.children);
+    var heading = el.tagName === 'H2' || (el.tagName === 'P' && el.closest('.statement') && !el.classList.contains('statement-sub') && !el.hasAttribute('data-ink'));
+    return heading && el.querySelector('br') ? wrapLines(el) : null;
+  }
+  // LISTEN FIRST：1文字ずつ span 化。読み上げ用に元の文言を .sr-only で保持
+  function splitInk(p, chars){
+    var vis = document.createElement('span'); vis.setAttribute('aria-hidden', 'true');
+    var sr = document.createElement('span'); sr.className = 'sr-only'; sr.innerHTML = p.innerHTML;
+    slice(p.childNodes).forEach(function(n){
+      if(n.nodeType !== 3){ vis.appendChild(n.cloneNode(true)); return; }
+      Array.from(n.nodeValue).forEach(function(c){
+        if(!c.trim()){ vis.appendChild(document.createTextNode(c)); return; }
+        var s = document.createElement('span'); s.textContent = c; vis.appendChild(s); chars.push({ el: s, key: '' });
+      });
+    });
+    p.textContent = ''; p.appendChild(sr); p.appendChild(vis);
+  }
+  // ヒーロー見出し：1文字ずつ span 化。元の文言は aria-label で保持
+  function splitHeroChars(h1){
+    var idx = 0;
+    h1.setAttribute('aria-label', h1.textContent);
+    slice(h1.children).forEach(function(line){
+      var txt = line.textContent;
+      line.setAttribute('aria-hidden', 'true');
+      line.classList.add('ch-line');
+      line.textContent = '';
+      Array.from(txt).forEach(function(c){
+        var s = document.createElement('span'); s.className = 'ch'; s.textContent = c;
+        s.style.setProperty('--i', idx++);
+        line.appendChild(s);
+      });
+    });
+    return idx;
+  }
+
+  function newItem(el, k, j, dist){ return { el: el, k: k, j: j, dist: dist, tx: 0, rx: 0, rot: 0, key: '', wc: false }; }
+
+  function measure(){
+    vh = window.innerHeight;
+    maxScroll = Math.max(0, document.documentElement.scrollHeight - vh);
+    items.forEach(function(it){
+      it.hidden = it.el.offsetParent === null;
+      if(it.hidden) return;
+      var t = absTop(it.el), shift = Math.min(M.stepMax, it.k * M.stepGroup + it.j * M.stepLine) * vh;
+      var e = Math.max(vh * M.revealEnd - shift, t - maxScroll + 1);
+      it.top = t; it.e = e; it.s = Math.max(vh * M.revealStart - shift, e + vh * .25);
+    });
+    photos.forEach(function(ph){
+      ph.top = absTop(ph.frame); ph.h = ph.frame.offsetHeight; ph.imgH = ph.img.offsetHeight;
+      ph.base = (ph.tight && !mq.matches) ? 1.2 : 1;
+    });
+    if(mark){
+      mark.top = absTop(mark.band); mark.h = mark.band.offsetHeight;
+      mark.shift = Math.min(M.markShift, Math.max(0, (mark.band.clientWidth - mark.el.offsetWidth) / 2 - 2));
+    }
+    if(ink){ ink.top = absTop(ink.ps[0]); var last = ink.ps[ink.ps.length - 1]; ink.h = absTop(last) + last.offsetHeight - ink.top; }
+    if(hero){
+      hero.h = hero.el.offsetHeight;
+      var mode = mq.matches ? 'm' : 'd';
+      if(hero.mode && hero.mode !== mode){ [hero.pad, hero.topline, hero.h1].forEach(function(n){ n.style.transform = ''; n.style.opacity = ''; }); hero.key = ''; }
+      hero.mode = mode;
+    }
+  }
+
+  function itemTransform(it, e){
+    var r = 1 - e;
+    if(!it.dist && !it.tx && !it.rx && !it.rot) return '';
+    var t = it.rx ? 'perspective(' + M.perspective + 'px) ' : '';
+    t += 'translate3d(' + (it.tx * r).toFixed(1) + 'px,' + (it.dist * r).toFixed(1) + 'px,0)';
+    if(it.rx) t += ' rotateX(' + (it.rx * r).toFixed(2) + 'deg)';
+    if(it.rot) t += ' rotate(' + (it.rot * r).toFixed(2) + 'deg)';
+    return t;
+  }
+  function applyItem(it, y){
+    if(it.hidden) return;
+    var p = clamp((it.s - (it.top - y)) / (it.s - it.e));
+    var key = p >= 1 ? '1' : p <= 0 ? '0' : p.toFixed(3);
+    if(key === it.key) return; it.key = key;
+    var st = it.el.style, moving = p > 0 && p < 1;
+    if(moving !== it.wc){ it.wc = moving; st.willChange = moving ? 'transform,opacity' : ''; }
+    if(p >= 1){ st.transform = ''; st.opacity = ''; return; }
+    var e = 1 - Math.pow(1 - p, 3);
+    st.transform = itemTransform(it, e);
+    st.opacity = Math.min(1, p * 1.2).toFixed(3);
+  }
+  function zoomFactor(ph, t){
+    var z = ph.zoom;
+    if(!z || z.t0 === null) return 1;
+    var q = clamp((t - z.t0) / z.ms);
+    if(q < 1) zoomRunning = true;
+    return 1 + (z.to - 1) * (.5 - .5 * Math.cos(Math.PI * q));
+  }
+  function applyPhoto(ph, y, t){
+    var p = ph.isHero ? clamp(y / (ph.top + ph.h)) : clamp((vh - (ph.top - y)) / (vh + ph.h));
+    var s = ph.base * (1 + ph.amp * (1 - p)) * zoomFactor(ph, t);
+    var room = Math.min(ph.o, 1 - ph.o) * (s - 1);          // 枠の端に隙間が出ない最大量
+    var ty = room * (1 - 2 * p) * ph.imgH;
+    var v = 'translate3d(0,' + ty.toFixed(1) + 'px,0) scale(' + s.toFixed(4) + ')';
+    if(v !== ph.key){ ph.key = v; ph.img.style.transform = v; }
+    if(ph.clip){
+      var c = ph.clip(clamp((vh * ph.clipFrom - (ph.top - y)) / (vh * (ph.clipFrom - ph.clipTo))));
+      if(c !== ph.ckey){ ph.ckey = c; ph.img.style.webkitClipPath = c; ph.img.style.clipPath = c; }
+    }
+  }
+  function applyMark(y){
+    var q = clamp((vh - (mark.top - y)) / (vh + mark.h));
+    var v = 'translate3d(calc(-50% + ' + (mark.shift * (1 - 2 * q)).toFixed(1) + 'px),-50%,0)';
+    if(v !== mark.key){ mark.key = v; mark.el.style.transform = v; }
+  }
+  function applyInk(y){
+    var prog = clamp((vh * M.inkFrom - (ink.top - y)) / (vh * M.inkLen + ink.h));
+    var n = ink.chars.length, w = M.inkSoft, pos = prog * (n + w);
+    for(var i = 0; i < n; i++){
+      var c = ink.chars[i], o = (M.inkMin + (1 - M.inkMin) * clamp((pos - i) / w)).toFixed(2);
+      if(o !== c.key){ c.key = o; c.el.style.opacity = o === '1.00' ? '' : o; }
+    }
+  }
+  function applyHero(y){
+    var p = clamp(y / hero.h);
+    var ty = (-y * M.heroShift).toFixed(1), fade = (1 - clamp((p - M.heroFadeFrom) / M.heroFadeLen)).toFixed(3);
+    var key = ty + '|' + fade;
+    if(key === hero.key) return; hero.key = key;
+    var tr = y > 0 ? 'translate3d(0,' + ty + 'px,0)' : '';
+    var wc = y > 0 ? 'transform,opacity' : '';
+    if(hero.mode === 'd'){ hero.pad.style.transform = tr; hero.pad.style.willChange = y > 0 ? 'transform' : ''; }
+    else { hero.topline.style.transform = tr; hero.h1.style.transform = tr; }
+    hero.h1.style.willChange = wc;
+    hero.h1.style.opacity = fade === '1.000' ? '' : fade;
+  }
+
+  function update(all){
+    var y = window.pageYOffset, t = now();
+    var sc = y > 8;
+    if(sc !== scrolled){ scrolled = sc; header.classList.toggle('is-scrolled', sc); }
+    if(!motion) return;
+    zoomRunning = false;
+    for(var i = 0; i < items.length; i++){ if(all || items[i].on) applyItem(items[i], y); }
+    for(var j = 0; j < photos.length; j++){ if(all || photos[j].on) applyPhoto(photos[j], y, t); }
+    if(ink && (all || ink.on)) applyInk(y);
+    if(mark && (all || mark.on)) applyMark(y);
+    if(hero && (all || hero.on)) applyHero(y);
+  }
+  function frame(){
+    ticking = false;
+    var all = needMeasure;
+    if(needMeasure){ needMeasure = false; measure(); }
+    update(all);
+    if(zoomRunning) schedule(false);   // ゆっくりズーム中だけ毎フレーム更新
+  }
+  function schedule(remeasure){
+    if(remeasure) needMeasure = true;
+    if(!ticking){ ticking = true; requestAnimationFrame(frame); }
+  }
+
+  window.addEventListener('scroll', function(){ schedule(false); }, { passive: true });
+  if(!motion){ update(true); return; }
+
+  // ---- 対象の登録 ----
+  var heroEl = document.querySelector('.hero');
+  var heroH1 = heroEl && heroEl.querySelector('h1');
+  var caseCount = 0;
+  slice(document.querySelectorAll('.reveal')).forEach(function(el){
+    if(el === heroH1) return;   // ヒーロー見出しは一文字ずつの演出で別処理
+    if(el.classList.contains('qa-dialogue')) return;   // 会話は吹き出しごとの「ぽん」で別処理
+    var k = stagger(el);
+    var isFrame = el.classList.contains('hero-media') || el.classList.contains('statement-media');
+    var lines = linesOf(el);
+    if(lines && lines.length > 1){
+      lines.forEach(function(ln, j){ items.push(newItem(ln, k, j, M.rise)); });
+    } else {
+      var it = newItem(el, k, 0, isFrame ? 0 : M.rise);
+      if(el.classList.contains('process-item')) it.rx = M.tiltX;
+      if(el.classList.contains('case')){
+        var dir = caseCount++ % 2 ? 1 : -1;   // 01:左から / 02:右から / 03:左から
+        it.tx = dir * M.caseX; it.rot = dir * M.caseRot;
+      }
+      items.push(it);
+    }
+  });
+  slice(document.querySelectorAll('.hero-media img, .statement-media img')).forEach(function(img){
+    var src = img.getAttribute('src');
+    var isHero = !!img.closest('.hero');
+    var soft = /food-shoot|statement-listen/.test(src);
+    var tight = img.classList.contains('zoom-tight');
+    var ph = { img: img, frame: img.parentNode, amp: isHero ? 0 : soft ? M.photoZoomSoft : M.photoZoom, tight: tight, o: tight ? .15 : .5, isHero: isHero, key: '', ckey: '', zoom: null, clip: null };
+    if(isHero) ph.zoom = { to: M.heroZoomTo, ms: M.heroZoomMs, t0: null };
+    if(/phone-call/.test(src)) ph.zoom = { to: M.askZoomTo, ms: M.askZoomMs, t0: null };
+    if(/imac-work/.test(src)){
+      ph.clipFrom = M.wipeFrom; ph.clipTo = M.wipeTo;
+      ph.clip = function(q){ return q >= 1 ? '' : 'inset(0 ' + ((1 - easeOut(q)) * 100).toFixed(2) + '% 0 0)'; };
+    }
+    if(/food-shoot/.test(src)){
+      ph.clipFrom = M.winFrom; ph.clipTo = M.winTo;
+      ph.clip = function(q){
+        if(q >= 1) return '';
+        var r = 1 - easeOut(q);
+        return 'inset(' + (M.winInset * r).toFixed(2) + '% round ' + (M.winRadius * r).toFixed(1) + 'px)';
+      };
+    }
+    photos.push(ph);
+  });
+  var inkPs = slice(document.querySelectorAll('[data-ink]'));
+  if(inkPs.length){ ink = { ps: inkPs, chars: [] }; inkPs.forEach(function(p){ splitInk(p, ink.chars); }); }
+  var markEl = document.querySelector('.watermark');
+  if(markEl) mark = { el: markEl, band: markEl.parentNode, key: '' };
+  // CONSULTATION の番号：中身を span で包み、表示時に1回だけスロット風に回す（文言はそのまま）
+  var slotHosts = slice(document.querySelectorAll('.point > span'));
+  slotHosts.forEach(function(host, i){
+    var s = document.createElement('span'); s.className = 'slot';
+    while(host.firstChild) s.appendChild(host.firstChild);
+    host.appendChild(s);
+    host.style.setProperty('--i', i);
+    host.classList.add('slot-host', 'slot-ready');
+  });
+  if(heroEl){
+    hero = { el: heroEl, pad: heroEl.querySelector('.hero-text-pad'), topline: heroEl.querySelector('.hero-topline'), h1: heroH1, key: '' };
+  }
+
+  measure();
+
+  // ---- 最初の画面内にある要素は、読み込み時に時間で表示（スクロール連動から外す） ----
+  var y0 = window.pageYOffset, intro = [];
+  items = items.filter(function(it){
+    if(it.hidden || it.top >= y0 + vh * .92) return true;
+    if(it.top + it.el.offsetHeight > y0) intro.push(it);
+    return false;
+  });
+  var heroCharsOn = heroH1 && absTop(heroH1) < y0 + vh && absTop(heroH1) + heroH1.offsetHeight > y0;
+  var heroCharCount = 0;
+  if(heroCharsOn){ heroCharCount = splitHeroChars(heroH1); heroH1.classList.add('ch-ready'); }
+  intro.forEach(function(it){ it.el.style.opacity = '0'; if(it.dist) it.el.style.transform = 'translate3d(0,' + it.dist + 'px,0)'; });
+  update(true);
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    intro.forEach(function(it){
+      var st = it.el.style, d = (it.k * .12 + it.j * .1).toFixed(2);
+      st.transition = 'opacity .9s ease-out ' + d + 's, transform 1.1s cubic-bezier(.16,1,.3,1) ' + d + 's';
+      st.opacity = ''; st.transform = '';
+      setTimeout(function(){ st.transition = ''; }, 1300 + d * 1000);
+    });
+    if(heroCharsOn){
+      heroH1.classList.add('ch-go');
+      var cs = getComputedStyle(document.documentElement);
+      var total = (parseFloat(cs.getPropertyValue('--m-char-dur')) + parseFloat(cs.getPropertyValue('--m-char-step')) * heroCharCount) * 1000 + 100;
+      setTimeout(function(){ heroH1.classList.remove('ch-ready', 'ch-go'); }, total);
+    }
+    photos.forEach(function(ph){ if(ph.isHero && ph.zoom) ph.zoom.t0 = now(); });
+    schedule(false);
+  }); });
+
+  // ---- 画面外は更新しない ----
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      en.target._mo.forEach(function(o){
+        o.on = en.isIntersecting;
+        if(o.img) o.img.style.willChange = o.on ? 'transform' : '';
+        if(o === mark) mark.el.style.willChange = o.on ? 'transform' : '';
+        if(o.on && o.zoom && o.zoom.t0 === null && !o.isHero) o.zoom.t0 = now();
+      });
+    });
+    schedule(false);
+  }, { rootMargin: '25% 0px 25% 0px' });
+  function watch(el, obj){ (el._mo = el._mo || []).push(obj); io.observe(el); }
+  items.forEach(function(it){ watch(it.el, it); });
+  photos.forEach(function(ph){ watch(ph.frame, ph); });
+  if(ink) watch(ink.ps[0].closest('.statement'), ink);
+  if(mark) watch(mark.band, mark);
+  // 1回だけ再生する演出用（画面内に入ったらクラスを付けて終了）
+  var once = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      once.unobserve(en.target);
+      en.target.classList.add(en.target._onceClass);
+    });
+  }, { threshold: .6 });
+  slotHosts.forEach(function(h){ h._onceClass = 'slot-go'; once.observe(h); });
+  // CASE STUDIES：吹き出しを順番に「ぽん」と表示（1回だけ）。
+  // 非表示のタブの中身は交差しないため、タブ切替で表示された時にまとめて順番に出る
+  var popIO = new IntersectionObserver(function(entries){
+    var n = 0;
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      popIO.unobserve(en.target);
+      en.target.style.setProperty('--i', n++);
+      en.target.classList.add('is-pop');
+    });
+  }, { threshold: .3 });
+  slice(document.querySelectorAll('.qa-line')).forEach(function(l){ l.classList.add('pop-ready'); popIO.observe(l); });
+  if(hero) watch(hero.el, hero);
+
+  // ---- レイアウト変化（画像読込・タブ切替・回転など）で再計測 ----
+  if('ResizeObserver' in window) new ResizeObserver(function(){ schedule(true); }).observe(document.body);
+  window.addEventListener('resize', function(){ schedule(true); });
+  window.addEventListener('load', function(){ schedule(true); });
 })();
 (function(){
   var tabs = document.querySelectorAll('.qa-tab');
